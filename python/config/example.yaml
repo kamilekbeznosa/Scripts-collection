@@ -1,0 +1,9 @@
+logging:
+  level: INFO
+
+dns_monitor:
+  warn_days: 14
+  domains:
+    - example.com
+    - github.com
+    - google.com
