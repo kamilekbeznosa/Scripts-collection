@@ -1,6 +1,7 @@
 from unittest.mock import patch, MagicMock
 from devops_toolkit.services.github_service import audit_target
 
+
 @patch("devops_toolkit.services.github_service.requests.get")
 def test_audit_target_passes(mock_get):
     """Test dla wariantu, gdzie repozytorium spełnia zasady polityki."""
@@ -13,9 +14,10 @@ def test_audit_target_passes(mock_get):
     mock_get.return_value = mock_response
 
     has_errors, results = audit_target("test_user", "dummy_token", False)
-    
+
     assert has_errors is False
     assert len(results) >= 0
+
 
 @patch("devops_toolkit.services.github_service.requests.get")
 def test_audit_target_fails(mock_get):
@@ -29,5 +31,5 @@ def test_audit_target_fails(mock_get):
     mock_get.return_value = mock_response
 
     has_errors, results = audit_target("test_user", "dummy_token", False)
-    
+
     assert has_errors is True

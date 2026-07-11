@@ -8,11 +8,14 @@ from devops_toolkit.services.dns_service import check_domains, logger
 
 app = typer.Typer(help="Narzędzie do monitorowania certyfikatów SSL/DNS.")
 
+
 @app.command()
 def check(
-    config_path: str = typer.Option("config/example.yaml", "--config", "-c", help="Ścieżka do pliku konfiguracyjnego"),
+    config_path: str = typer.Option(
+        "config/example.yaml", "--config", "-c", help="Ścieżka do pliku konfiguracyjnego"
+    ),
     verbose: bool = typer.Option(False, "--verbose", "-v", help="Włącz tryb DEBUG"),
-    json_output: bool = typer.Option(False, "--json", help="Zwróć wynik w formacie JSON")
+    json_output: bool = typer.Option(False, "--json", help="Zwróć wynik w formacie JSON"),
 ):
     """
     Sprawdza certyfikaty SSL dla domen zdefiniowanych w pliku YAML.
@@ -22,7 +25,9 @@ def check(
 
     config_file = Path(config_path)
     if not config_file.exists():
-        typer.secho(f"Błąd: Nie znaleziono pliku konfiguracyjnego: {config_path}", fg=typer.colors.RED)
+        typer.secho(
+            f"Błąd: Nie znaleziono pliku konfiguracyjnego: {config_path}", fg=typer.colors.RED
+        )
         raise typer.Exit(code=2)
 
     with open(config_file, "r") as f:
@@ -36,23 +41,30 @@ def check(
         typer.secho("Błąd: Brak zdefiniowanych domen w pliku YAML.", fg=typer.colors.RED)
         raise typer.Exit(code=2)
 
-    logger.debug(f"Wczytano {len(domains)} domen do sprawdzenia. Próg ostrzegawczy: {warn_days} dni.")
+    logger.debug(
+        f"Wczytano {len(domains)} domen do sprawdzenia. Próg ostrzegawczy: {warn_days} dni."
+    )
 
     has_errors, results = check_domains(domains, warn_days)
 
     if json_output:
-        typer.echo(json.dumps({
-            "domains_checked": len(domains),
-            "warn_days": warn_days,
-            "has_errors": has_errors,
-            "results": results
-        }))
+        typer.echo(
+            json.dumps(
+                {
+                    "domains_checked": len(domains),
+                    "warn_days": warn_days,
+                    "has_errors": has_errors,
+                    "results": results,
+                }
+            )
+        )
         sys.exit(1 if has_errors else 0)
 
     if has_errors:
         sys.exit(1)
     else:
         sys.exit(0)
+
 
 if __name__ == "__main__":
     app()
