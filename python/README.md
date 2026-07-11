@@ -278,7 +278,7 @@ Portfolio / CV bullet points (add after linking this repo):
 
 | Project | Connection |
 |---|---|
-| [Observability Platform](../) (Project 1) | `k8s-health-checker` scans the same clusters monitored by Prometheus/Grafana |
+| [Observability Platform](https://github.com/kamilekbeznosa/IaacProjects/tree/main/GitOps) (Project 1) | `k8s-health-checker` scans the same clusters monitored by Prometheus/Grafana |
 | `bash/ssl_expiry_checker.sh` | Superseded by `dns-cert-monitor` with multi-domain YAML, retries, and exit codes |
 | Azure DevOps CI/CD project | `ado-pipeline-monitor` (planned stretch tool) will audit pipeline runs |
 
