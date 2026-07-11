@@ -1,4 +1,3 @@
-import pytest
 from unittest.mock import patch, MagicMock
 from devops_toolkit.services.github_service import audit_target
 

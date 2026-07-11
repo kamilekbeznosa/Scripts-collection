@@ -1,4 +1,3 @@
-import pytest
 from unittest.mock import patch, MagicMock
 from devops_toolkit.services.dns_service import check_domains
 

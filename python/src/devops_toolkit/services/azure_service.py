@@ -34,6 +34,6 @@ def get_azure_costs(subscription_id: str, is_dry_run: bool = False) -> str:
     )
     
     scope = f"/subscriptions/{subscription_id}"
-    response = client.query.usage(scope=scope, parameters=query)
+    _ = client.query.usage(scope=scope, parameters=query)
     
     return "Raport wygenerowany pomyślnie z Azure API."

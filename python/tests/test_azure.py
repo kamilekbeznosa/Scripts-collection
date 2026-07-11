@@ -1,4 +1,3 @@
-import os
 from devops_toolkit.services.azure_service import get_azure_costs
 
 def test_get_azure_costs_dry_run():
